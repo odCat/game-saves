@@ -7,15 +7,18 @@ import save
 
 class TestSave(unittest.TestCase):
 
-    def setUp(self):
-        self.temporary_file = 'temporary.json'
-        with open(self.temporary_file, 'w') as file:
+    temporary_file = 'temporary.json'
+
+    @classmethod
+    def setUpClass(cls):
+        with open(cls.temporary_file, 'w') as file:
             test_text = '{"test_name": "test/path"}'
             file.write(test_text)
 
-    def tearDown(self):
-        if os.path.exists(self.temporary_file):
-            os.remove(self.temporary_file)
+    @classmethod
+    def tearDownClass(cls):
+        if os.path.exists(cls.temporary_file):
+            os.remove(cls.temporary_file)
         else:
             print('File not found')
 
