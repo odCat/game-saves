@@ -25,3 +25,6 @@ class TestSave(unittest.TestCase):
     def test_should_read_game_save_paths(self):
         expected = {'test_name': 'test/path'}
         self.assertEqual(expected, save.load_game_paths(self.temporary_file))
+
+    def test_should_return_true_if_folder_exists(self):
+        self.assertTrue(save.game_has_folder(''))
