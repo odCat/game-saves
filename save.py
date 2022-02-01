@@ -18,5 +18,10 @@ def game_has_folder(game_name):
         return False
 
 
+def create_game_folder(game_name):
+    path = 'saves/' + game_name
+    os.mkdir(path)
+
+
 if __name__ == '__main__':
     pass

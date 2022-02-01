@@ -28,3 +28,10 @@ class TestSave(unittest.TestCase):
 
     def test_should_return_true_if_folder_exists(self):
         self.assertTrue(save.game_has_folder(''))
+
+    def test_should_return_false_if_folder_exists(self):
+        self.assertFalse(save.game_has_folder('does_not_exist'))
+
+
+if __name__ == '__main__':
+    unittest.main()
