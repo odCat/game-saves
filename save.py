@@ -2,6 +2,7 @@
 
 import os
 import json
+import shutil
 
 
 def load_game_paths(file_name):
@@ -23,5 +24,12 @@ def create_game_folder(game_name):
     os.mkdir(path)
 
 
+def copy_save_file(source, target):
+    shutil.copytree(source, target)
+
+
 if __name__ == '__main__':
     pass
+
+# TODO
+# Does shutil.copytree need a try/catch block?
