@@ -2,6 +2,7 @@
 
 import os
 import unittest
+
 import save
 
 
@@ -32,6 +33,12 @@ class TestSave(unittest.TestCase):
 
     def test_should_return_false_if_folder_exists(self):
         self.assertFalse(save.game_has_folder('does_not_exist'))
+
+    def test_should_return_false_if_file_exists(self):
+        self.assertFalse(save.game_save_paths_file_exists('does_not_exist'))
+
+    def test_should_return_true_if_file_exists(self):
+        self.assertTrue(save.game_save_paths_file_exists(self.temporary_file))
 
 
 if __name__ == '__main__':

@@ -3,7 +3,6 @@
 import os
 import json
 import shutil
-
 import datetime
 
 
@@ -44,9 +43,15 @@ def generate_folder_name():
     return result
 
 
+def game_save_paths_file_exists(path='games.json'):
+    if os.path.exists(path):
+        return True
+    else:
+        return False
+
+
 if __name__ == '__main__':
     pass
 
 # TODO
 # Does shutil.copytree need a try/catch block?
-# Is it needed to use the name to generate the name of the saves folder?
