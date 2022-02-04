@@ -11,6 +11,7 @@ class TestSave(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        save.create_saves_folder()
         with open(cls.temporary_file, 'w') as file:
             test_text = '{"test_name": "test/path"}'
             file.write(test_text)

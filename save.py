@@ -7,6 +7,12 @@ import shutil
 import datetime
 
 
+def create_saves_folder():
+    saves_folder = 'saves'
+    if not os.path.isdir(saves_folder):
+        os.mkdir(saves_folder)
+
+
 def load_game_paths(file_name):
     with open(file_name, 'r') as file:
         result = file.read()
