@@ -20,10 +20,21 @@ import shutil
 import datetime
 
 
+def folder_exists(folder_path):
+    if os.path.isdir(folder_path):
+        return True
+    else:
+        return False
+
+
+def create_folder(folder_path):
+    if not folder_exists(folder_path):
+        os.mkdir(folder_path)
+
+
 def create_saves_folder():
     saves_folder = 'saves'
-    if not os.path.isdir(saves_folder):
-        os.mkdir(saves_folder)
+    create_folder(saves_folder)
 
 
 def load_game_paths(file_name):
@@ -32,24 +43,11 @@ def load_game_paths(file_name):
     return json.loads(result)
 
 
-def game_has_folder(game_name):
-    path = 'saves' + '/' + game_name
-    if os.path.isdir(path):
-        return True
-    else:
-        return False
-
-
-def create_game_folder(game_name):
-    path = 'saves/' + game_name
-    os.mkdir(path)
-
-
 def copy_save_file(source, target):
     shutil.copytree(source, target)
 
 
-def generate_folder_name():
+def generate_name():
     result = datetime.datetime.now().date().isoformat()
     result += ' ' + str(datetime.datetime.now().hour)
     result += ':' + str(datetime.datetime.now().minute)

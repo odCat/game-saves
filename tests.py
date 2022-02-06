@@ -43,10 +43,10 @@ class TestSave(unittest.TestCase):
         self.assertEqual(expected, save.load_game_paths(self.temporary_file))
 
     def test_should_return_true_if_folder_exists(self):
-        self.assertTrue(save.game_has_folder(''))
+        self.assertTrue(save.folder_exists('saves'))
 
     def test_should_return_false_if_folder_exists(self):
-        self.assertFalse(save.game_has_folder('does_not_exist'))
+        self.assertFalse(save.folder_exists('does_not_exist'))
 
     def test_should_return_false_if_file_exists(self):
         self.assertFalse(save.game_save_paths_file_exists('does_not_exist'))
