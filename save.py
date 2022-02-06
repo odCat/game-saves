@@ -61,8 +61,8 @@ def copy_save_file(source, target):
 def generate_name():
     result = datetime.datetime.now().date().isoformat()
     result += ' ' + str(datetime.datetime.now().hour)
-    result += ':' + str(datetime.datetime.now().minute)
-    result += ':' + str(datetime.datetime.now().second)
+    result += str(datetime.datetime.now().minute)
+    result += str(datetime.datetime.now().second)
     return result
 
 
@@ -75,8 +75,12 @@ def save():
     root = 'saves'
     games_and_paths = load_game_paths()
 
-    for game in games_and_paths:
-        create_folder_if_doesnt_exist(root + '/' + game)
+    for game, path in games_and_paths.items():
+        if not folder_exists(path):
+            continue
+        game_folder = root + '/' + game
+        create_folder_if_doesnt_exist(game_folder)
+        copy_save_file(path, game_folder + '/' + generate_name())
 
 
 def clean():
@@ -84,9 +88,14 @@ def clean():
 
 
 if __name__ == '__main__':
-    pass
+    save()
 
 # TODO
 # Does shutil.copytree need a try/catch block?
-# Hook clean to git clone
-# Is there an option to not trigger the hook when cloning?
+# Use arguments
+# Improve handling of missing saves
+# Compare saves
+# Remove the older saves
+# Make it work for Windows
+# Switch to use a class
+# Add GUI
