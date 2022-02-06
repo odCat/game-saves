@@ -33,9 +33,8 @@ def create_folder(folder_path):
         os.mkdir(folder_path)
 
 
-def create_saves_folder_if_doesnt_exist():
-    saves_folder = 'saves'
-    create_folder(saves_folder)
+def create_folder_if_doesnt_exist(folder_name):
+    create_folder(folder_name)
 
 
 def file_exists(file_path):
@@ -67,9 +66,17 @@ def generate_name():
     return result
 
 
+def create_saves_folder_if_doesnt_exist():
+    create_folder_if_doesnt_exist('saves')
+
+
 def save():
     create_saves_folder_if_doesnt_exist()
+    root = 'saves'
     games_and_paths = load_game_paths()
+
+    for game in games_and_paths:
+        create_folder_if_doesnt_exist(root + '/' + game)
 
 
 if __name__ == '__main__':
