@@ -26,7 +26,7 @@ class TestSave(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        save.create_saves_folder()
+        save.create_saves_folder_if_doesnt_exist()
         with open(cls.temporary_file, 'w') as file:
             test_text = '{"test_name": "test/path"}'
             file.write(test_text)
@@ -49,10 +49,10 @@ class TestSave(unittest.TestCase):
         self.assertFalse(save.folder_exists('does_not_exist'))
 
     def test_should_return_false_if_file_exists(self):
-        self.assertFalse(save.game_save_paths_file_exists('does_not_exist'))
+        self.assertFalse(save.file_exists('does_not_exist'))
 
     def test_should_return_true_if_file_exists(self):
-        self.assertTrue(save.game_save_paths_file_exists(self.temporary_file))
+        self.assertTrue(save.file_exists(self.temporary_file))
 
 
 if __name__ == '__main__':

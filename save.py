@@ -18,6 +18,7 @@ import os
 import json
 import shutil
 import datetime
+from sys import exit as sys_exit
 
 
 def folder_exists(folder_path):
@@ -32,15 +33,26 @@ def create_folder(folder_path):
         os.mkdir(folder_path)
 
 
-def create_saves_folder():
+def create_saves_folder_if_doesnt_exist():
     saves_folder = 'saves'
     create_folder(saves_folder)
 
 
-def load_game_paths(file_name):
-    with open(file_name, 'r') as file:
-        result = file.read()
-    return json.loads(result)
+def file_exists(file_path):
+    if os.path.exists(file_path):
+        return True
+    else:
+        return False
+
+
+def load_game_paths(file_path='games.json'):
+    if not file_exists(file_path):
+        print('Game saves path file was not found.')
+        sys_exit()
+    else:
+        with open(file_path, 'r') as file:
+            result = file.read()
+        return json.loads(result)
 
 
 def copy_save_file(source, target):
@@ -55,11 +67,9 @@ def generate_name():
     return result
 
 
-def game_save_paths_file_exists(path='games.json'):
-    if os.path.exists(path):
-        return True
-    else:
-        return False
+def save():
+    create_saves_folder_if_doesnt_exist()
+    games_and_paths = load_game_paths()
 
 
 if __name__ == '__main__':
