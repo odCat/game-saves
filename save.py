@@ -79,8 +79,14 @@ def save():
         create_folder_if_doesnt_exist(root + '/' + game)
 
 
+def clean():
+    shutil.rmtree('saves')
+
+
 if __name__ == '__main__':
     pass
 
 # TODO
 # Does shutil.copytree need a try/catch block?
+# Hook clean to git clone
+# Is there an option to not trigger the hook when cloning?
