@@ -70,9 +70,13 @@ def create_saves_folder_if_doesnt_exist():
     create_folder_if_doesnt_exist('saves')
 
 
-def save():
+def setup_root_folder(root='saves'):
     create_saves_folder_if_doesnt_exist()
-    root = 'saves'
+    return root
+
+
+def save():
+    root = setup_root_folder()
     games_and_paths = load_game_paths()
 
     for game, path in games_and_paths.items():

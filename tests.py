@@ -48,11 +48,11 @@ class TestSave(unittest.TestCase):
     def test_should_return_false_if_folder_exists(self):
         self.assertFalse(save.folder_exists('does_not_exist'))
 
-    def test_should_return_false_if_file_exists(self):
-        self.assertFalse(save.file_exists('does_not_exist'))
-
     def test_should_return_true_if_file_exists(self):
         self.assertTrue(save.file_exists(self.temporary_file))
+
+    def test_should_return_false_if_file_exists(self):
+        self.assertFalse(save.file_exists('does_not_exist'))
 
 
 if __name__ == '__main__':
