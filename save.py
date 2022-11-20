@@ -75,6 +75,15 @@ def setup_root_folder(root='saves'):
     return root
 
 
+def search_game(game, games_and_paths):
+    return game in games_and_paths
+
+
+def search_game_in_dict(game):
+    games_and_paths = load_game_paths()
+    return search_game(game, games_and_paths)
+
+
 def save():
     root = setup_root_folder()
     games_and_paths = load_game_paths()

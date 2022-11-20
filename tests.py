@@ -54,6 +54,11 @@ class TestSave(unittest.TestCase):
     def test_should_return_false_if_file_exists(self):
         self.assertFalse(save.file_exists('does_not_exist'))
 
+    def test_search_game(self):
+        games_and_paths = {'game1': 'path1', 'game2': 'path2'}
+        self.assertTrue(save.search_game('game1', games_and_paths))
+        self.assertFalse(save.search_game('game3', games_and_paths))
+
 
 if __name__ == '__main__':
     unittest.main()
