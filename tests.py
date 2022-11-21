@@ -22,25 +22,28 @@ import save
 
 class TestSave(unittest.TestCase):
 
-    temporary_file = 'temporary.json'
+    games_paths_test_file = 'temporary.json'
+    test_game = 'test_game'
+    test_path = '.'
+    test_root = '.'
 
     @classmethod
     def setUpClass(cls):
         save.create_saves_folder_if_doesnt_exist()
-        with open(cls.temporary_file, 'w') as file:
-            test_text = '{"test_name": "test/path"}'
+        with open(cls.games_paths_test_file, 'w') as file:
+            test_text = '{"game1": "path1", "game2": "path2"}'
             file.write(test_text)
 
     @classmethod
     def tearDownClass(cls):
-        if os.path.exists(cls.temporary_file):
-            os.remove(cls.temporary_file)
+        if os.path.exists(cls.games_paths_test_file):
+            os.remove(cls.games_paths_test_file)
         else:
             print('File not found')
 
     def test_should_read_game_save_paths(self):
-        expected = {'test_name': 'test/path'}
-        self.assertEqual(expected, save.load_game_paths(self.temporary_file))
+        expected = {'game1': 'path1', 'game2': 'path2'}
+        self.assertEqual(expected, save.load_game_paths(self.games_paths_test_file))
 
     def test_should_return_true_if_folder_exists(self):
         self.assertTrue(save.folder_exists('saves'))
@@ -49,7 +52,7 @@ class TestSave(unittest.TestCase):
         self.assertFalse(save.folder_exists('does_not_exist'))
 
     def test_should_return_true_if_file_exists(self):
-        self.assertTrue(save.file_exists(self.temporary_file))
+        self.assertTrue(save.file_exists(self.games_paths_test_file))
 
     def test_should_return_false_if_file_exists(self):
         self.assertFalse(save.file_exists('does_not_exist'))
