@@ -24,8 +24,9 @@ class TestSave(unittest.TestCase):
 
     games_paths_test_file = 'temporary.json'
     test_game = 'test_game'
-    test_path = '.'
-    test_root = '.'
+    test_save = 'test_save'
+    test_path = './test'
+    test_root = 'saves'
 
     @classmethod
     def setUpClass(cls):
@@ -33,11 +34,25 @@ class TestSave(unittest.TestCase):
         with open(cls.games_paths_test_file, 'w') as file:
             test_text = '{"game1": "path1", "game2": "path2"}'
             file.write(test_text)
+        with open(cls.test_save, 'w') as file:
+            test_text = 'This ia a test save file'
+            file.write(test_text)
 
     @classmethod
     def tearDownClass(cls):
         if os.path.exists(cls.games_paths_test_file):
             os.remove(cls.games_paths_test_file)
+        else:
+            print('File not found')
+
+        if os.path.exists(cls.test_save):
+            os.remove(cls.test_save)
+        else:
+            print('File not found')
+
+        # remove game test dir
+        if os.path.exists(cls.test_root + '/' + cls.test_game):
+            os.rmdir(cls.test_root + '/' + cls.test_game)
         else:
             print('File not found')
 
@@ -61,6 +76,11 @@ class TestSave(unittest.TestCase):
         games_and_paths = {'game1': 'path1', 'game2': 'path2'}
         self.assertTrue(save.search_game('game1', games_and_paths))
         self.assertFalse(save.search_game('game3', games_and_paths))
+
+    def test_save_one_game(self):
+        save.save_one_game(self.test_game, self.test_path, self.test_root)
+        self.assertTrue(save.folder_exists(self.test_root + '/' + self.test_game))
+    #     self.assertTrue(save.file_exists(test_path + test_root + ))
 
 
 if __name__ == '__main__':

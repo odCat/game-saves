@@ -98,6 +98,18 @@ def save():
         print('{} {} backed up'.format(game, '...' + (27 - len(game))*'.'))
 
 
+def save_one_game(game, path, root):
+    root = setup_root_folder(root)
+
+    if not folder_exists(path):
+        print('The saves for {} could not be found.'.format(game))
+    else:
+        game_folder = root + '/' + game
+        create_folder_if_doesnt_exist(game_folder)
+        # copy_save_file(path, game_folder + '/' + generate_name())
+        # print('{} {} backed up'.format(game, '...' + (27 - len(game)) * '.'))
+
+
 def clean():
     shutil.rmtree('saves')
 
