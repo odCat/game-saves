@@ -118,7 +118,10 @@ if __name__ == '__main__':
     save()
 
 # TODO
-# Does shutil.copytree need a try/catch block?
+# extract remove folder from tearDownClass
+# extract create file from setUpClass
+# make save_one_game use generate_name and test it
+# Does shutil.copytree need a try/catch block? Yes
 # Use arguments
 # Improve handling of missing saves
 # Compare saves
