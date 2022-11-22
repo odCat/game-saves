@@ -15,6 +15,7 @@
 #   limitations under the License
 
 import os
+import shutil
 import unittest
 
 import save
@@ -34,7 +35,8 @@ class TestSave(unittest.TestCase):
         with open(cls.games_paths_test_file, 'w') as file:
             test_text = '{"game1": "path1", "game2": "path2"}'
             file.write(test_text)
-        with open(cls.test_save, 'w') as file:
+        save.create_folder_if_doesnt_exist(cls.test_path)
+        with open(cls.test_path + '/' + cls.test_save, 'w') as file:
             test_text = 'This ia a test save file'
             file.write(test_text)
 
@@ -45,14 +47,14 @@ class TestSave(unittest.TestCase):
         else:
             print('File not found')
 
-        if os.path.exists(cls.test_save):
-            os.remove(cls.test_save)
+        if os.path.exists(cls.test_path):
+            shutil.rmtree(cls.test_path)
         else:
             print('File not found')
 
         # remove game test dir
         if os.path.exists(cls.test_root + '/' + cls.test_game):
-            os.rmdir(cls.test_root + '/' + cls.test_game)
+            shutil.rmtree(cls.test_root + '/' + cls.test_game)
         else:
             print('File not found')
 
@@ -79,8 +81,9 @@ class TestSave(unittest.TestCase):
 
     def test_save_one_game(self):
         save.save_one_game(self.test_game, self.test_path, self.test_root)
-        self.assertTrue(save.folder_exists(self.test_root + '/' + self.test_game))
-    #     self.assertTrue(save.file_exists(test_path + test_root + ))
+        save_folder = self.test_root + '/' + self.test_game
+        self.assertTrue(save.folder_exists(save_folder))
+        self.assertTrue(save.file_exists(save_folder + '/' + self.test_save))
 
 
 if __name__ == '__main__':
