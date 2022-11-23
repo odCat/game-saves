@@ -21,6 +21,20 @@ import unittest
 import save
 
 
+def remove_folder(folder):
+    if os.path.exists(folder):
+        shutil.rmtree(folder)
+    else:
+        print('Folder not found')
+
+
+def remove_file(file):
+    if os.path.exists(file):
+        os.remove(file)
+    else:
+        print('File not found')
+
+
 class TestSave(unittest.TestCase):
 
     games_paths_test_file = 'temporary.json'
@@ -42,29 +56,9 @@ class TestSave(unittest.TestCase):
 
     @classmethod
     def tearDownClass(self):
-        if os.path.exists(self.games_paths_test_file):
-            os.remove(self.games_paths_test_file)
-        else:
-            print('File not found')
-
-        if os.path.exists(self.test_path):
-            shutil.rmtree(self.test_path)
-        else:
-            print('File not found')
-
-        # remove game test dir
-        if os.path.exists(self.test_root + '/' + self.test_game):
-            shutil.rmtree(self.test_root + '/' + self.test_game)
-        else:
-            print('File not found')
-
-        # cls.remove_folder(cls, cls.test_root + '/' + cls.test_game)
-
-    def remove_folder(self, folder):
-        if os.path.exists(folder):
-            shutil.rmtree(folder)
-        else:
-            print('Folder not found')
+        remove_file(self.games_paths_test_file)
+        remove_folder(self.test_path)
+        remove_folder(self.test_root + '/' + self.test_game)
 
     def test_should_read_game_save_paths(self):
         expected = {'game1': 'path1', 'game2': 'path2'}
