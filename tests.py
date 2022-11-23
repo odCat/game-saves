@@ -35,6 +35,11 @@ def remove_file(file):
         print('File not found')
 
 
+def create_file(file, text):
+    with open(file, 'w') as file:
+        file.write(text)
+
+
 class TestSave(unittest.TestCase):
 
     games_paths_test_file = 'temporary.json'
@@ -46,13 +51,12 @@ class TestSave(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         save.create_saves_folder_if_doesnt_exist()
-        with open(cls.games_paths_test_file, 'w') as file:
-            test_text = '{"game1": "path1", "game2": "path2"}'
-            file.write(test_text)
+        test_text = '{"game1": "path1", "game2": "path2"}'
+        create_file(cls.games_paths_test_file, test_text)
         save.create_folder_if_doesnt_exist(cls.test_path)
-        with open(cls.test_path + '/' + cls.test_save, 'w') as file:
-            test_text = 'This ia a test save file'
-            file.write(test_text)
+        test_text = 'This ia a test save file'
+        test_save_file = cls.test_path + '/' + cls.test_save
+        create_file(test_save_file, test_text)
 
     @classmethod
     def tearDownClass(cls):
