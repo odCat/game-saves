@@ -30,33 +30,41 @@ class TestSave(unittest.TestCase):
     test_root = 'saves'
 
     @classmethod
-    def setUpClass(cls):
+    def setUpClass(self):
         save.create_saves_folder_if_doesnt_exist()
-        with open(cls.games_paths_test_file, 'w') as file:
+        with open(self.games_paths_test_file, 'w') as file:
             test_text = '{"game1": "path1", "game2": "path2"}'
             file.write(test_text)
-        save.create_folder_if_doesnt_exist(cls.test_path)
-        with open(cls.test_path + '/' + cls.test_save, 'w') as file:
+        save.create_folder_if_doesnt_exist(self.test_path)
+        with open(self.test_path + '/' + self.test_save, 'w') as file:
             test_text = 'This ia a test save file'
             file.write(test_text)
 
     @classmethod
-    def tearDownClass(cls):
-        if os.path.exists(cls.games_paths_test_file):
-            os.remove(cls.games_paths_test_file)
+    def tearDownClass(self):
+        if os.path.exists(self.games_paths_test_file):
+            os.remove(self.games_paths_test_file)
         else:
             print('File not found')
 
-        if os.path.exists(cls.test_path):
-            shutil.rmtree(cls.test_path)
+        if os.path.exists(self.test_path):
+            shutil.rmtree(self.test_path)
         else:
             print('File not found')
 
         # remove game test dir
-        if os.path.exists(cls.test_root + '/' + cls.test_game):
-            shutil.rmtree(cls.test_root + '/' + cls.test_game)
+        if os.path.exists(self.test_root + '/' + self.test_game):
+            shutil.rmtree(self.test_root + '/' + self.test_game)
         else:
             print('File not found')
+
+        # cls.remove_folder(cls, cls.test_root + '/' + cls.test_game)
+
+    def remove_folder(self, folder):
+        if os.path.exists(folder):
+            shutil.rmtree(folder)
+        else:
+            print('Folder not found')
 
     def test_should_read_game_save_paths(self):
         expected = {'game1': 'path1', 'game2': 'path2'}
