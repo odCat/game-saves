@@ -44,21 +44,21 @@ class TestSave(unittest.TestCase):
     test_root = 'saves'
 
     @classmethod
-    def setUpClass(self):
+    def setUpClass(cls):
         save.create_saves_folder_if_doesnt_exist()
-        with open(self.games_paths_test_file, 'w') as file:
+        with open(cls.games_paths_test_file, 'w') as file:
             test_text = '{"game1": "path1", "game2": "path2"}'
             file.write(test_text)
-        save.create_folder_if_doesnt_exist(self.test_path)
-        with open(self.test_path + '/' + self.test_save, 'w') as file:
+        save.create_folder_if_doesnt_exist(cls.test_path)
+        with open(cls.test_path + '/' + cls.test_save, 'w') as file:
             test_text = 'This ia a test save file'
             file.write(test_text)
 
     @classmethod
-    def tearDownClass(self):
-        remove_file(self.games_paths_test_file)
-        remove_folder(self.test_path)
-        remove_folder(self.test_root + '/' + self.test_game)
+    def tearDownClass(cls):
+        remove_file(cls.games_paths_test_file)
+        remove_folder(cls.test_path)
+        remove_folder(cls.test_root + '/' + cls.test_game)
 
     def test_should_read_game_save_paths(self):
         expected = {'game1': 'path1', 'game2': 'path2'}
