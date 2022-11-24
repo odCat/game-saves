@@ -118,7 +118,6 @@ if __name__ == '__main__':
     save()
 
 # TODO
-# extract create file from setUpClass
 # make save_one_game use generate_name and test it
 # Does shutil.copytree need a try/catch block? Yes
 # Use arguments
