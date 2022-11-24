@@ -105,9 +105,19 @@ def save_one_game(game, path, root):
         print('The saves for {} could not be found.'.format(game))
     else:
         game_folder = root + '/' + game
-        # create_folder_if_doesnt_exist(game_folder)
         copy_save_file(path, game_folder)
-        # print('{} {} backed up'.format(game, '...' + (27 - len(game)) * '.'))
+
+
+def call_save_one_game(game):
+    root = setup_root_folder()
+    games_and_paths = load_game_paths()
+    game_folder = root + '/' + game
+    create_folder_if_doesnt_exist(game_folder)
+
+    save_folder = game_folder + '/' + generate_name()
+    path = games_and_paths[game]
+    save_one_game(game, path, save_folder)
+    print('{} {} backed up'.format(game, '...' + (27 - len(game)) * '.'))
 
 
 def clean():
@@ -118,7 +128,7 @@ if __name__ == '__main__':
     save()
 
 # TODO
-# make save_one_game use generate_name and test it
+# Rename copy_save_file()
 # Does shutil.copytree need a try/catch block? Yes
 # Use arguments
 # Improve handling of missing saves
